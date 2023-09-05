@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addItems } from "./cartSlice";
 
-const action = () => {
-  const dispatch = useDispatch();
+const Action = () => {
+  const Dispatch = useDispatch();
 
   const handleAddItems = () => {
-    dispatch(addItems("Grapes"));
+    Dispatch(addItems("Grapes"));
   };
 
   return (
@@ -16,4 +16,4 @@ const action = () => {
   );
 };
 
-export default action;
+export default Action;

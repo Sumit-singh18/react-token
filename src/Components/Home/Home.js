@@ -132,3 +132,65 @@
 // With these modifications, when you click the "Fetch JWT Token" button using the TokenFetchButton component, 
 // the token will be fetched, decoded, and stored in Redux state. You can then access the decoded token in other components,
 //  such as TokenInfo, for displaying or using its data.
+
+
+
+
+// import React, { useEffect } from 'react';
+
+// function MyComponent() {
+//   useEffect(() => {
+//     // Get the current URL
+//     const currentURL = window.location.href;
+
+//     // Create a URLSearchParams object to work with query parameters
+//     const params = new URLSearchParams(currentURL);
+
+//     // Get the value of a specific query parameter
+//     const searchValue = params.get('gbfhuiwhfkjnhuisffnjkiu');
+
+//     // Do something with the searchValue
+//     console.log('Query parameter value:', searchValue);
+//   }, []);
+
+//   return (
+//     <div>
+//       {/* Your component JSX */}
+//     </div>
+//   );
+// }
+
+// export default MyComponent;
+// In this example:
+
+// We use the useEffect hook to run code after the component has mounted.
+// We get the current URL using window.location.href.
+// We create a URLSearchParams object called params to work with the query parameters.
+// We use the get method of the params object to retrieve the value of the gbfhuiwhfkjnhuisffnjkiu query parameter.
+// You can then use the searchValue variable to access the value of the query parameter and perform any further actions you need.
+// This code snippet demonstrates how to access a specific query parameter value from the URL. If you have multiple query parameters, you can use additional get calls to retrieve their values as needed.
+
+
+
+
+
+// // Get the current URL
+// const currentURL = window.location.href;
+
+// // Create a URLSearchParams object to work with query parameters
+// const params = new URLSearchParams(currentURL);
+
+// // Get the value of a specific query parameter
+// const queryValue = params.get('query');
+
+// // Do something with the query parameter value
+// if (queryValue) {
+//   console.log('Query parameter "query" value:', queryValue);
+//   // You can perform additional actions with the query parameter here
+// }
+
+// So, in the URL https://example.com/search?query=react&category=tutorials, 
+// if you use 'query' as the parameter name, you're telling the code to extract the value associated with the query parameter, 
+// which in this case is "react". If you wanted to extract the value of the category parameter, you would use 'category' as the parameter name instead.
+
+// You can replace 'query' with the actual name of the query parameter you want to work with in your specific application.
