@@ -1,10 +1,10 @@
 import './App.css';
-import MyComponent from './Components/Url';
+import Action from './Components/redux/action';
 // import Navbar from './Components/Home/Navbar';
 function App() {
   return (
     <div className="App">
-     <h1><MyComponent/></h1>
+     <h1><Action/></h1>
     </div>
   );
 }

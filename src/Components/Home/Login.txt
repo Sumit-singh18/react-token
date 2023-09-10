@@ -1,0 +1,186 @@
+Create Redux Slice for Auth:
+
+Create a Redux slice to manage the authentication state. Create a file authSlice.js:
+
+javascript
+// authSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: {
+    accessToken: null,
+  },
+  reducers: {
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+    },
+  },
+});
+
+export const { setAccessToken } = authSlice.actions;
+export const selectAccessToken = (state) => state.auth.accessToken;
+export default authSlice.reducer;
+Configure Redux Store:
+
+Set up your Redux store in src/app/store.js:
+
+javascript
+Copy code
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '../features/auth/authSlice';
+
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+});
+Create a Login Component:
+
+Create a login component Login.js where the login button will be placed. When the login button is clicked, it will trigger an action to fetch the access token and store it in Redux and local storage.
+
+javascript
+Copy code
+// Login.js
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../features/auth/authSlice';
+
+const Login = () => {
+  const dispatch = useDispatch();
+
+  const handleLogin = async () => {
+    // Replace 'BASE_URL' with your actual base URL for obtaining the access token.
+    const BASE_URL = 'https://your-api-url.com';
+    
+    try {
+      // Make an API request to obtain the access token.
+      const response = await fetch(`${BASE_URL}/login`, {
+        method: 'POST', // or any other HTTP method you use for login
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const accessToken = data.accessToken;
+
+        // Store the access token in Redux and local storage
+        dispatch(setAccessToken(accessToken));
+        localStorage.setItem('accessToken', accessToken);
+      } else {
+        // Handle login error here
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Login failed', error);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+};
+
+export default Login;
+Include the Login Component in Your App:
+
+Modify your src/App.js to include the Login component:
+
+javascript
+Copy code
+// App.js
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectAccessToken } from './features/auth/authSlice';
+import Login from './components/Login';
+
+function App() {
+  const accessToken = useSelector(selectAccessToken);
+
+  return (
+    <div>
+      {accessToken ? (
+        // Render components for authenticated user
+        <div>
+          <h1>Welcome! You are logged in.</h1>
+          {/* Add other authenticated content here */}
+        </div>
+      ) : (
+        // Render login component if not authenticated
+        <Login />
+      )}
+    </div>
+  );
+}
+
+export default App;
+Adding the Access Token to API Requests:
+
+To include the access token in every API request, you can create a custom Axios instance (assuming you use Axios for API requests) and set the Authorization header. Import this instance wherever you need to make API calls.
+
+javascript
+Copy code
+// api.js
+import axios from 'axios';
+import { selectAccessToken } from '../features/auth/authSlice';
+
+const api = axios.create({
+  baseURL: 'https://your-api-url.com',
+});
+
+api.interceptors.request.use((config) => {
+  const accessToken = selectAccessToken(store.getState());
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+
+export default api;
+Now you can import and use this api instance in your components to make authenticated API requests.
+
+Remember to replace 'https://your-api-url.com' and adapt the code to your specific API and application requirements. This code sets up a basic authentication flow with Redux and local storage. Ensure you have proper error handling and security measures in your production application.
+
+
+
+
+
+
+
+
+
+
+
+Use the api Instance in Your Components:
+Now, you can import and use the api instance in your components to make authenticated API calls.
+
+
+// ExampleComponent.js
+import React, { useEffect, useState } from 'react';
+import api from '../api'; // Import the 'api' instance
+
+const ExampleComponent = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Make an authenticated API call using the 'api' instance
+    api.get('/example-endpoint')
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <h2>API Response:</h2>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
+
+export default ExampleComponent;
