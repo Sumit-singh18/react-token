@@ -1,118 +1,21 @@
-import React from 'react';
-import jwt from 'jsonwebtoken';
-
-const Login = () => {
-  const handleLoginClick = () => {
-    // Replace 'your-authentication-url' with the actual URL
-    window.location.href = 'https://your-authentication-url';
-  };
-
-  const extractAndStoreAccessToken = () => {
-    // Step 1: Parse the URL to get the "abc" parameter
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const abcParam = urlSearchParams.get('abc');
-
-    if (abcParam) {
-      try {
-        // Step 2: Decode the "abc" parameter as a JWT
-        const decodedToken = jwt.decode(abcParam);
-
-        if (decodedToken) {
-          // Step 3: Extract the access token from the decoded JWT
-          const accessToken = decodedToken.access_token;
-
-          if (accessToken) {
-            // Step 4: Store the access token in local storage
-            localStorage.setItem('access_token', accessToken);
-
-            // Step 5: Redirect to another component/page (e.g., Dashboard)
-            window.location.href = '/dashboard'; // Replace with the appropriate route
-          }
-        }
-      } catch (error) {
-        console.error('Error decoding JWT:', error);
-      }
-    }
-  };
-
-  return (
-    <div>
-      <h2>Login Page</h2>
-      <button onClick={handleLoginClick}>Login</button>
-      <button onClick={extractAndStoreAccessToken}>Extract and Store Access Token</button>
-    </div>
-  );
-};
-
-export default Login;
+Subject: Request for Emergency Leave Due to health issue 
 
 
-  return (
-    <div>
-      <h2>Login Page</h2>
-      {/* Your login UI goes here */}
-    </div>
-  );
-};
+I hope this email finds you well. I am writing to inform you about a sudden and serious health issue that I am currently facing. Unfortunately, I have been diagnosed with a severe stomach disease, and my medical condition has worsened over the past few days.
 
-export default Login;
+ However, my health has deteriorated to the point where I am unable to perform my duties effectively. My doctors have strongly advised that I take immediate medical leave to undergo treatment and recover.
 
+Attached to this email, you will find a copy of my medical report, which provides details of my diagnosis and the recommended treatment plan. I assure you that I did not take this decision lightly, and I am committed to minimizing any disruption to the project during my absence. I am willing to provide any assistance necessary to ensure a smooth transition of my responsibilities to a colleague or team member. Additionally, I will keep you updated on my progress and expected duration of the medical leave.
 
+I kindly request your understanding and support during this challenging time. If you require any further information or have specific instructions regarding the project while I am on leave, please do not hesitate to reach out to me via email or phone.
 
+I apologize for any inconvenience my absence may cause and will make every effort to return to work as soon as I am medically fit to do so.
 
+Thank you for your understanding and consideration.
 
+Sincerely,
 
+Sumit Kumar
+925937
 
-
-
-
-
-
-
-import React, { useEffect } from 'react';
-
-const Login = () => {
-  useEffect(() => {
-    // Function to handle the login process
-    const handleLogin = async () => {
-      try {
-        // Step 1: Make a request to the base URL
-        const response = await fetch('https://localhost9092/mlrsso', {
-          method: 'GET',
-        });
-
-        if (response.ok) {
-          // Step 2: Parse the response URL to get the access token
-          const url = new URL(response.url);
-          const accessToken = url.searchParams.get('access_token');
-
-          if (accessToken) {
-            // Step 3: Store the access token in local storage
-            localStorage.setItem('access_token', accessToken);
-
-            // Step 4: Navigate to another component/page (e.g., Dashboard)
-            window.location.href = '/dashboard'; // Replace with the appropriate route
-          } else {
-            console.error('No access token found in the URL.');
-          }
-        } else {
-          console.error('Login failed.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    // Call the login function when the component mounts
-    handleLogin();
-  }, []);
-
-  return (
-    <div>
-      <h2>Login Page</h2>
-      {/* Your login UI goes here */}
-    </div>
-  );
-};
-
-export default Login;
+Attachment: Medical Report [Attach the medical report to the email]
