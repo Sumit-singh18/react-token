@@ -84,3 +84,12 @@ function YourComponent() {
 }
 
 export default YourComponent;
+
+
+
+const allAuthoCodes = roles.reduce((accumulator, currentRole) => {
+  const authoCodesForRole = currentRole.authAcces.map((authAccess) => authAccess.authoocode);
+  return accumulator.concat(authoCodesForRole);
+}, []);
+
+console.log(allAuthoCodes);
