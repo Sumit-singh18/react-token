@@ -19,3 +19,68 @@ Sumit Kumar
 925937
 
 Attachment: Medical Report [Attach the medical report to the email]
+
+
+
+
+
+
+
+
+
+
+
+import React, { useEffect, useState } from 'react';
+
+function YourComponent() {
+  const [userRole, setUserRole] = useState('');
+  const [showNavbar, setShowNavbar] = useState(false); // Initially hide the navbar
+
+  useEffect(() => {
+    // Simulate fetching user role data from an API
+    fetchUserRoleFromAPI()
+      .then((role) => {
+        setUserRole(role);
+
+        // Check if the userRole meets the condition to show the navbar
+        if (role === 'Admin') {
+          setShowNavbar(true); // Show the navbar for Admin users
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user role:', error);
+        // Handle the error appropriately
+      });
+  }, []);
+
+  const fetchUserRoleFromAPI = async () => {
+    // Simulate fetching user role data from an API
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('Admin'); // Replace with the actual user role obtained from the API
+      }, 1000); // Simulated delay
+    });
+  };
+
+  return (
+    <div>
+      {showNavbar ? (
+        <nav>
+          {/* Render your navigation menu here */}
+          <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </nav>
+      ) : (
+        <div>
+          {/* Render an alternative message or content when the navbar is disabled */}
+          <p>Navbar is disabled for your role.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default YourComponent;
