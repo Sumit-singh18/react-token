@@ -153,3 +153,39 @@ function YourComponent() {
 }
 
 export default YourComponent;
+
+
+
+
+
+
+import React from 'react';
+
+function ObjectMappingComponent({ data }) {
+  return (
+    <div>
+      <h2>Object Data</h2>
+      <ul>
+        {Object.keys(data).map(key => (
+          <li key={key}>
+            {key}: {typeof data[key] === 'object'
+              ? JSON.stringify(data[key])
+              : data[key]}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default ObjectMappingComponent;
+
+
+const data = {
+  key1: 'value1',
+  key2: {
+    nestedKey: 'value2'
+  },
+  key3: 'value3'
+};
+
