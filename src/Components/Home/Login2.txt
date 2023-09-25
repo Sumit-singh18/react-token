@@ -189,3 +189,19 @@ const data = {
   key3: 'value3'
 };
 
+
+
+
+const data = {
+  key1: 'value1',
+  key2: {
+    nestedKey: 'value2',
+    nestedKey1: 'value3'
+  },
+  key3: 'value4'
+};
+
+// Map through key2 and retrieve values
+const nestedValues = Object.keys(data.key2).map(key => data.key2[key]);
+
+console.log(nestedValues); // This will print ['value2', 'value3'] to the console
