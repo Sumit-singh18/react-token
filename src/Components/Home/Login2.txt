@@ -205,3 +205,50 @@ const data = {
 const nestedValues = Object.keys(data.key2).map(key => data.key2[key]);
 
 console.log(nestedValues); // This will print ['value2', 'value3'] to the console
+
+
+
+/* Dark background */
+body {
+  background-color: #333; /* Adjust the color to your preference */
+  color: white; /* Text color */
+  font-family: 'YourCustomFont', sans-serif; /* Replace 'YourCustomFont' with your custom font */
+}
+
+/* Spinner styles */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #007bff; /* You can change the color */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+import React from 'react';
+import './Spinner.css';
+
+function Spinner() {
+  return (
+    <div className="spinner-container">
+      <div className="spinner"></div>
+    </div>
+  );
+}
+
+export default Spinner;
