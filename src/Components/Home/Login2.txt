@@ -220,7 +220,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height   : 100vh;
 }
 
 .spinner {
@@ -252,3 +252,12 @@ function Spinner() {
 }
 
 export default Spinner;
+
+
+
+{isAdmin ? (
+            <Route path="/admin" component={AdminDashboard} />
+          ) : (
+            <Redirect to="/alternative" />
+          )}
+          <Route path="/alternative" component={AlternativeScreen} />
